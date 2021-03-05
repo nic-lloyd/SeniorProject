@@ -16,6 +16,7 @@ import {
 import SetupInputs from "../components/SetupInputs";
 
 import "../theme/variables.css";
+import Main_page from "./Main_page";
 
 const Setup: React.FC = () => {
   return (
@@ -32,7 +33,7 @@ const Setup: React.FC = () => {
         <IonItem>
           <SetupInputs />
         </IonItem>
-        <IonButton className="ion-float-right ion-margin">
+        <IonButton className="ion-float-right ion-margin" href="./Main_page">
           Find Restaurants
         </IonButton>
       </IonContent>
