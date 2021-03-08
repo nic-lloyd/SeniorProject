@@ -5,6 +5,8 @@ import Home from "./pages/Home";
 import Setup from "./pages/Setup";
 import Main_page from "./pages/Main_page";
 import Settings from "./pages/Settings";
+import Matches from "./pages/Matches";
+import SessionInfo from "./pages/SessionInfo"
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -43,6 +45,12 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/Settings">
           <Settings />
+        </Route>
+        <Route exact path="/Matches">
+          <Matches />
+        </Route>
+        <Route exact path="/SessionInfo">
+          <SessionInfo />
         </Route>
       </IonRouterOutlet>
     </IonReactRouter>
