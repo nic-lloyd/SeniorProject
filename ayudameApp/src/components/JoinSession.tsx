@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { IonContent, IonModal, IonButton } from "@ionic/react";
+import {
+  IonContent,
+  IonModal,
+  IonButton,
+  IonInput,
+  IonLabel,
+  IonItem,
+  IonCard,
+} from "@ionic/react";
 
 const JoinSession: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
@@ -7,7 +15,13 @@ const JoinSession: React.FC = () => {
   return (
     <div>
       <IonModal isOpen={showModal}>
-        <p>This is modal content</p>
+        <IonCard>
+          <IonItem className="ion-text-center ion-margin-top">
+            <IonLabel position="floating">Session Code</IonLabel>
+            <IonInput></IonInput>
+          </IonItem>
+          <IonButton expand="block">Join Session</IonButton>
+        </IonCard>
         <IonButton expand="block" onClick={() => setShowModal(false)}>
           Close
         </IonButton>
