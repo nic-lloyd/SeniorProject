@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCheckbox, IonList, IonItem, IonLabel, IonItemDivider } from '@ionic/react';
 
 const checkboxList = [
-  { val: 'Pepperoni', isChecked: true },
+  { val: '', isChecked: true },
   { val: 'Sausage', isChecked: false },
   { val: 'Mushroom', isChecked: false }
 ];

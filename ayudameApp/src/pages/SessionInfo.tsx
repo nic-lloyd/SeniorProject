@@ -1,9 +1,15 @@
 import React from 'react';
 
-import { IonList, IonItem, IonLabel, IonInput, IonToggle, IonRadio, IonCheckbox, IonItemSliding, IonItemOption, IonItemOptions, IonContent } from '@ionic/react';
+import { IonList, IonItem, IonLabel, IonInput, IonToggle, IonRadio, IonCheckbox, IonItemSliding, IonItemOption, IonItemOptions, IonContent, IonTitle, IonToolbar, IonHeader, IonPage } from '@ionic/react';
 
 const SessionInfo: React.FC = () => {
-  return (
+return (
+<IonPage>
+<IonHeader>
+        <IonToolbar>
+          <IonTitle>Session Info</IonTitle>
+        </IonToolbar>
+      </IonHeader>
   <IonContent>
     {/*-- List of Text Items --*/}
     <IonList>
@@ -24,6 +30,7 @@ const SessionInfo: React.FC = () => {
       </IonItem>
     </IonList>
   </IonContent>
+</IonPage>
   );
 };
 export default SessionInfo;

@@ -9,7 +9,7 @@ const Settings: React.FC = () => {
         <IonButton expand="full">Profile</IonButton>
         <IonButton expand="full">FAQ</IonButton>
         <IonButton expand="full">Filters</IonButton>
-        <IonButton expand="full" color="primary">Log Out</IonButton>
+        <IonButton expand="full" color="danger">Log Out</IonButton>
 
       </IonContent>
     )

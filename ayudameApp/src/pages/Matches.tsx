@@ -30,7 +30,7 @@ const Matches: React.FC = () => {
           </IonThumbnail>
           <IonLabel>
             <h2>Resturant 2</h2>
-            <p>Clikc view to see menu</p>
+            <p>Click view to see menu</p>
           </IonLabel>
           <IonButton fill="outline" slot="end">View</IonButton>
         </IonItem>
