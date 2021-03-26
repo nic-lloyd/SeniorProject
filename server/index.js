@@ -40,14 +40,14 @@ app.use(express.urlencoded({limit: '10mb', extended: true}));
 
 /** HTTP REQUESTS */
 expRoute.get('/main/:businesses', (req, res) => {
-    conn.query('SELECT * FROM businesses', function (error, results, fields) {
+    conn.query(`SELECT * FROM businesses`, function (error, results, fields) {
         if (error) throw error;
         res.send(JSON.stringify(results));
     })
 })
 
 expRoute.get('/joinSession/:sid', (req, res) => {
-    conn.query('SELECT * FROM sessions WHERE sid=?', function (error, results, fields) {
+    conn.query(`SELECT * FROM sessions WHERE sid = ${req.body.sid}`, function (error, results, fields) {
         if (error) throw error;
         res.send(JSON.stringify(results));
     })
