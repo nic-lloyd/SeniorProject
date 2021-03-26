@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Setup from "./pages/Setup";
 import Main_page from "./pages/Main_page";
 import Matches from "./pages/Matches";
+import Land from "./pages/Landing page/Landing page"
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -24,6 +25,7 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import "./theme/variables.css";
+//import App from './App';
 
 const App: React.FC = () => (
   <IonApp>
@@ -43,6 +45,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/matches">
           <Matches />
+        </Route>
+        <Route exact path="/land">
+          <Land />
         </Route>
       </IonRouterOutlet>
     </IonReactRouter>
