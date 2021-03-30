@@ -3,9 +3,25 @@ var config = require("./config");
 var express = require("express");
 var app = express();
 var apiRouter = express.Router();
+var axios = require("axios");
 
 const prisma = new PrismaClient();
 app.use(express.json());
+
+/**
+ * create axios instance for connection with the
+ * Yelp API
+ * (Yealp API Documentation: https://www.yelp.com/developers/documentation/v3/business_search)
+ */
+const API_KEY = process.env.YELP_API_KEY;
+console.log(API_KEY);
+const yelpREST = axios.create({
+  baseURL: "https://api.yelp.com/v3",
+  headers: {
+    Authorization: `Bearer ${API_KEY}`,
+    "Content-type": "application/json",
+  },
+});
 
 /**
  * GET request for all sessions in the session table
@@ -88,6 +104,32 @@ apiRouter.put("/updateName/:id", async (req, res) => {
     data: { name: req.body.name },
   });
   res.json(user);
+});
+
+/**
+ * Proxy GET request for initial query to the Yelp API
+ * !!!!!!!!!!!!!!
+ * This isnt working. Getting unhandled promise error.
+ * !!!!!!!!!!!!!!
+ */
+apiRouter.get("/yelp", async (req, res) => {
+  const { location, radius, price } = req.params;
+  var result;
+  yelpREST
+    .get("/business/search", {
+      params: {
+        location: location,
+        radius: radius,
+        price: price,
+      },
+    })
+    .then(({ data }) => {
+      result = data; //Not sure why this isnt working
+      businesses.forEach((b) => {
+        console.log("Name: ", b.name);
+      });
+    });
+  res.json(result);
 });
 
 app.use("/api", apiRouter);
