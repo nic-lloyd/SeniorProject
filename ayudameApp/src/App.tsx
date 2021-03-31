@@ -4,7 +4,6 @@ import { IonReactRouter } from "@ionic/react-router";
 import Home from "./pages/Home";
 import Setup from "./pages/Setup";
 import Main_page from "./pages/TabContainer/Tab1_Main_page";
-//import Matches from "./pages/Matches";
 import Land from "./pages/Landing page/Landing page"
 
 /* Core CSS required for Ionic components to work properly */
@@ -94,9 +93,6 @@ const App: React.FC = () => (
       <Route exact path="/setup">
       <Setup />
          </Route>
-       {/* <Route exact path="/main_page">
-      <Main_page />
-         </Route> */}
          <Route exact path="/land">
            <Land />
          </Route>
