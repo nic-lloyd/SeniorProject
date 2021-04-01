@@ -1,8 +1,12 @@
-import React from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonList, IonText, IonAvatar, IonThumbnail, IonButton, IonIcon, IonDatetime, IonSelect, IonSelectOption, IonToggle, IonInput, IonCheckbox, IonRange } from '@ionic/react';
+
+import React, { useState } from 'react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonList, IonText, IonAvatar, IonThumbnail, IonButton, IonIcon, IonDatetime, IonSelect, IonSelectOption, IonToggle, IonInput, IonCheckbox, IonRange, IonItemDivider } from '@ionic/react';
 import { closeCircle, home, star, navigate, informationCircle, checkmarkCircle, shuffle } from 'ionicons/icons';
 
 const Matches: React.FC = () => {
+
+  const [checked, setChecked] = useState(false);
+
   return (
     <IonPage>
       <IonHeader>
@@ -19,10 +23,12 @@ const Matches: React.FC = () => {
           </IonThumbnail>
           <IonLabel>
             <h2>Resturant 1</h2>
-            <p>Click view to see menu</p>
+            <p>Click view to open Yelp info</p>
           </IonLabel>
           <IonButton fill="outline" slot="end">View</IonButton>
         </IonItem>
+
+        <IonItemDivider>Votes:</IonItemDivider>
 
         <IonItem>
           <IonThumbnail slot="start">
@@ -30,10 +36,13 @@ const Matches: React.FC = () => {
           </IonThumbnail>
           <IonLabel>
             <h2>Resturant 2</h2>
-            <p>Click view to see menu</p>
+            <p>Click view to open Yelp info</p>
           </IonLabel>
           <IonButton fill="outline" slot="end">View</IonButton>
         </IonItem>
+
+
+        <IonItemDivider>Votes:</IonItemDivider>
 
         <IonItem>
           <IonThumbnail slot="start">
@@ -41,10 +50,12 @@ const Matches: React.FC = () => {
           </IonThumbnail>
           <IonLabel>
             <h2>Resturant 3</h2>
-            <p>Click view to see menu</p>
+            <p>Click view to open Yelp info</p>
           </IonLabel>
           <IonButton fill="outline" slot="end">View</IonButton>
         </IonItem>
+
+        <IonItemDivider>Votes:</IonItemDivider>
 
         <IonItem>
           <IonThumbnail slot="start">
@@ -52,10 +63,12 @@ const Matches: React.FC = () => {
           </IonThumbnail>
           <IonLabel>
             <h2>Resturant 4</h2>
-            <p>Click view to see menu</p>
+            <p>Click view to open Yelp info</p>
           </IonLabel>
           <IonButton fill="outline" slot="end">View</IonButton>
         </IonItem>
+
+        <IonItemDivider>Votes:</IonItemDivider>
 
       </IonContent>
     </IonPage>
