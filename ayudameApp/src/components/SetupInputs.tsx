@@ -12,31 +12,40 @@ const SetupInputs: React.FC = () => {
   const [showToast2, setShowToast2] = useState(false);
 
 
+  //check for input errors
+  //if none, send form inputs to submitInfo({inputs})
   function checkInfo(location: string | undefined, price: PriceOptions | undefined, range: number | undefined) {
     if (location === undefined || location === '' || price === undefined || range === undefined) {
-      console.log('error');
+      console.log('input error');
       return;
     }
     submitInfo({ location, price, range })
   }
 
+  //return JSON object 
   async function submitInfo(setupData: SetupData) {
 
     console.log(setupData);
   }
 
   return (
+
+    
     <IonCard>
+
+      {/*Location input */}
       <IonItemDivider>Search Area</IonItemDivider>
       <IonItem>
         <IonInput value={location} placeholder="Enter Location" onIonChange={e => setLocation(e.detail.value!)}></IonInput>
       </IonItem>
 
+      {/*Range input */}
       <IonItemDivider>Range: {rangeValue}</IonItemDivider>
       <IonItem>
         <IonRange min={5} max={25} pin={true} value={rangeValue} onIonChange={e => setRangeValue(e.detail.value as number)} />
       </IonItem>
 
+      {/*Price input */}
       <IonList>
         <IonRadioGroup value={price} onIonChange={e => setPrice(e.detail.value)}>
           <IonListHeader>
@@ -46,16 +55,15 @@ const SetupInputs: React.FC = () => {
           </IonListHeader>
           <IonRow>
 
+            {/*Price Radio Buttons */}
             <IonItem>
               <IonLabel>$</IonLabel>
               <IonRadio value="$" />
             </IonItem>
-
             <IonItem>
               <IonLabel>$$</IonLabel>
               <IonRadio value="$$" />
             </IonItem>
-
             <IonItem>
               <IonLabel>$$$</IonLabel>
               <IonRadio value="$$$" />
@@ -64,6 +72,7 @@ const SetupInputs: React.FC = () => {
         </IonRadioGroup>
       </IonList>
 
+      {/*New Code button*/}
       <IonButton onClick={() => setShowToast1(true)} expand="block">Get new code</IonButton>
       <IonToast
         isOpen={showToast1}
@@ -71,6 +80,7 @@ const SetupInputs: React.FC = () => {
         message="Code Generated"
         duration={1000}
       />
+      {/*Button */}
       <IonButton onClick={() => checkInfo(location, price, rangeValue)} expand="block">Save</IonButton>
 
     </IonCard>

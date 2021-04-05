@@ -1,6 +1,6 @@
 export enum PriceOptions {'$' , '$$' , '$$$'} 
 export interface SetupData {
-    location: string | null;
+    location: string;
     price: PriceOptions;
     range: number;
 }
