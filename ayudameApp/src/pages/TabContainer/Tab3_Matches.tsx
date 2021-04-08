@@ -25,7 +25,7 @@ const Matches: React.FC = () => {
             <h2>Resturant 1</h2>
             <p>Click view to open Yelp info</p>
           </IonLabel>
-          <IonButton fill="outline" slot="end">View</IonButton>
+          <IonButton onClick={() => window.open("https://www.yelp.com/developers/","_blank")} fill="outline" slot="end">View</IonButton>
         </IonItem>
 
         <IonItemDivider>Votes:</IonItemDivider>
@@ -38,7 +38,7 @@ const Matches: React.FC = () => {
             <h2>Resturant 2</h2>
             <p>Click view to open Yelp info</p>
           </IonLabel>
-          <IonButton fill="outline" slot="end">View</IonButton>
+          <IonButton onClick={() => window.open("https://www.yelp.com/developers/","_blank")} fill="outline" slot="end">View</IonButton>
         </IonItem>
 
 
@@ -52,7 +52,7 @@ const Matches: React.FC = () => {
             <h2>Resturant 3</h2>
             <p>Click view to open Yelp info</p>
           </IonLabel>
-          <IonButton fill="outline" slot="end">View</IonButton>
+          <IonButton onClick={() => window.open("https://www.yelp.com/developers/","_blank")} fill="outline" slot="end">View</IonButton>
         </IonItem>
 
         <IonItemDivider>Votes:</IonItemDivider>
@@ -65,7 +65,7 @@ const Matches: React.FC = () => {
             <h2>Resturant 4</h2>
             <p>Click view to open Yelp info</p>
           </IonLabel>
-          <IonButton fill="outline" slot="end">View</IonButton>
+          <IonButton onClick={() => window.open("https://www.yelp.com/developers/","_blank")} fill="outline" slot="end">View</IonButton>
         </IonItem>
 
         <IonItemDivider>Votes:</IonItemDivider>
