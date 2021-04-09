@@ -4,6 +4,7 @@ import { AppBar, IconButton, Toolbar, Collapse } from '@material-ui/core';
 import SortIcon from '@material-ui/icons/Sort';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Link as Scroll } from 'react-scroll';
+import PlaceToVisit from './PlaceToVisit';
 
 
 const useStyles = makeStyles((theme) => ({
