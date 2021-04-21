@@ -1,64 +1,52 @@
 import React from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonList, IonText, IonAvatar, IonThumbnail, IonButton, IonIcon, IonDatetime, IonSelect, IonSelectOption, IonToggle, IonInput, IonCheckbox, IonRange } from '@ionic/react';
-import { closeCircle, home, star, navigate, informationCircle, checkmarkCircle, shuffle } from 'ionicons/icons';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton } from '@ionic/react';
+import { pin, wifi, wine, warning, walk } from 'ionicons/icons';
+import './Matches.css';
+
+
 
 const Matches: React.FC = () => {
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Matches</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent>
+<IonPage>
+  <IonHeader translucent>
+      <IonToolbar>
+        <IonTitle>Card</IonTitle>
+      </IonToolbar>
+    </IonHeader>,
+    <IonContent>
+      <IonCard href="/home" mode="ios">
+        <img className="img" width="50" height="50" src="https://img.mobiscroll.com/demos/card_3.png" />
+        
+        <IonCardHeader>
+          <IonCardTitle>Join Session</IonCardTitle>
+        </IonCardHeader>
+      </IonCard>
+      <IonCard>
+        <img className="img" width="50" height="50" src="https://img.mobiscroll.com/demos/card_3.png" />
+        
+        <IonCardHeader>
+          <IonCardTitle>Join Session</IonCardTitle>
+        </IonCardHeader>
+      </IonCard>
+
+      
 
 
-        <IonItem>
-          <IonThumbnail slot="start">
-            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==" />
-          </IonThumbnail>
-          <IonLabel>
-            <h2>Resturant 1</h2>
-            <p>Click view to see menu</p>
-          </IonLabel>
-          <IonButton fill="outline" slot="end">View</IonButton>
-        </IonItem>
 
-        <IonItem>
-          <IonThumbnail slot="start">
-            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==" />
-          </IonThumbnail>
-          <IonLabel>
-            <h2>Resturant 2</h2>
-            <p>Click view to see menu</p>
-          </IonLabel>
-          <IonButton fill="outline" slot="end">View</IonButton>
-        </IonItem>
 
-        <IonItem>
-          <IonThumbnail slot="start">
-            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==" />
-          </IonThumbnail>
-          <IonLabel>
-            <h2>Resturant 3</h2>
-            <p>Click view to see menu</p>
-          </IonLabel>
-          <IonButton fill="outline" slot="end">View</IonButton>
-        </IonItem>
+  
 
-        <IonItem>
-          <IonThumbnail slot="start">
-            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==" />
-          </IonThumbnail>
-          <IonLabel>
-            <h2>Resturant 4</h2>
-            <p>Click view to see menu</p>
-          </IonLabel>
-          <IonButton fill="outline" slot="end">View</IonButton>
-        </IonItem>
-
+        <IonCard>
+          <IonItem href="#" className="ion-activated">
+            <IonIcon icon={wifi} slot="start" />
+            <IonLabel>Card Link Item 1 activated</IonLabel>
+          </IonItem>
+        </IonCard>
       </IonContent>
+
+      
     </IonPage>
+    
   );
 };
 export default Matches;

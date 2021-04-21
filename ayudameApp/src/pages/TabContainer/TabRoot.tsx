@@ -13,6 +13,7 @@ import Main_page from './Tab1_Main_page';
 import Friends from './Tab2_Friends';
 import Matches from './Tab3_Matches';
 import Settings from './Tab4_Settings';
+import './TabRoot.css';
 
 
 
@@ -27,7 +28,7 @@ const TabRoot: React.FC = () => (
         <Route path="/tabs" render={() => <Redirect to="/tabs/tab1" />} exact={true} />
         {/* <Route path="/" render={() => <Redirect to="/tabs/tab1" />} exact={true} /> */}
       </IonRouterOutlet>
-      <IonTabBar  slot="bottom">
+      <IonTabBar  slot="bottom" color="dark">
         <IonTabButton tab="tab1" href="/tabs/tab1">
           <IonIcon icon={home} />
           <IonLabel>Home</IonLabel>
