@@ -26,10 +26,11 @@ function Cardswipe() {
                                 <div
                                     style={{ backgroundImage: `url(${business.image_url})` }}
                                     className="card">
+                                        <div className="card_info">
                                     <h3 className="restaraunt_name">{business.name}</h3>
                                     <p>{business.location?.address1}</p>
                                     <p className="location">{business.location?.city}, {business.location?.state}
-                                        {business.location?.zip_code} </p>
+                                        {business.location?.zip_code} </p></div>
                                 </div>
                             </div>
                         </TinderCard>

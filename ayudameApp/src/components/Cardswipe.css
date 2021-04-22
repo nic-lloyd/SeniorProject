@@ -10,10 +10,17 @@
 	box-shadow: 0px 18px 53px 0px rgba(0, 0, 0, 0.3);
 }
 
-.card > p {
+.card_info {
 	background: black;
-	position: relative;
+	position: absolute;
 	top: 510px;
+	left: 0;
+	width: 100vw;
+	padding: 0;
+}
+
+.card_info > h3 {
+	color:green;
 }
 
 .card > h3 {
