@@ -25,6 +25,7 @@ div.container {
 	max-width: 85vw;
 	max-height: 20vh;
 	padding: 25px;
+	padding-bottom: 20vh;
 	color: white;
 	background-color: #222428;
 	font-family: Nunito;
@@ -33,9 +34,9 @@ div.container {
 	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.restaraunt_name {
+/* .restaraunt_name {
 	max-height: 1vh;
-}
+} */
 
 .location {
 	font-size: 1rem;
@@ -53,12 +54,12 @@ div.container {
 	}
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 500px) {
 	.info_button {
 		position: relative;
 		/* left: 500px; */
 		display: flex;
-		margin-left: 500px;
+		margin-left: 55vw;
 		top: 70px;
 		max-height: 0vh;
 		width: auto;
