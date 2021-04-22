@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import TinderCard from 'react-tinder-card';
 import "./Cardswipe.css";
 import axios from 'axios'
-import { business } from "ionicons/icons";
+import { bus, business } from "ionicons/icons";
 
-function TinderCards() {
+function Cardswipe() {
     const [businesses, setBusinesses] = useState<any[]>([]);
 
     useEffect(() => {
@@ -13,34 +13,61 @@ function TinderCards() {
                 console.log(res)
                 setBusinesses(res.data)
             })
-    }, [business]);
+    }, []);
+
 
     return (
-        <div>
-            <h1>Restaurants</h1>
+        <div >
             <div className="cardSwipe_cardContainer">
                 {businesses.map(business => (
-
                     <div className="swipe">
-                        <TinderCard
-                            key={business.name}
-                            preventSwipe={["up", "down"]}
-                        >
-                            <div
-                                style={{ backgroundImage: `url(${business.image_url})` }}
-                                className="card"
-                            >
-                                <h3>{business.name}</h3>
+                        <TinderCard key={business.name} preventSwipe={['up', 'down']} >
+                            <div className="card_border">
+                                <div
+                                    style={{ backgroundImage: `url(${business.image_url})` }}
+                                    className="card">
+                                    <h3 className="restaraunt_name">{business.name}</h3>
+                                    <p>{business.location?.address1}</p>
+                                    <p className="location">{business.location?.city}, {business.location?.state}
+                                        {business.location?.zip_code} </p>
+                                </div>
                             </div>
                         </TinderCard>
                     </div>
-
                 ))}
             </div>
         </div>
     );
 }
-export default TinderCards;
+export default Cardswipe;
+
+
+/* return (
+    <div>
+        <h1>Restaurants</h1>
+        <div className="cardSwipe_cardContainer">
+            {businesses.map(business => (
+
+                <div className="swipe">
+                    <TinderCard
+                        key={business.name}
+                        preventSwipe={["up", "down"]}
+                    >
+                        <div
+                            style={{ backgroundImage: `url(${business.image_url})` }}
+                            className="card"
+                        >
+                            <h3>{business.name}</h3>
+                        </div>
+                    </TinderCard>
+                </div>
+
+            ))}
+        </div>
+    </div>
+);
+}
+export default TinderCards; */
 
 
 
