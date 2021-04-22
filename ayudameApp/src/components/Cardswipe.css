@@ -33,13 +33,37 @@ div.container {
 	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.restaraunt_name {
+	max-height: 1vh;
+}
+
 .location {
 	font-size: 1rem;
 }
 
-/* .restaraunt_name {
-	line-height: 20px;
-} */
+@media screen and (min-width: 50px) {
+	.info_button {
+		position: relative;
+		/* left: 500px; */
+		display: flex;
+		margin-left: 225px;
+		top: 70px;
+		max-height: 0vh;
+		width: auto;
+	}
+}
+
+@media screen and (min-width: 800px) {
+	.info_button {
+		position: relative;
+		/* left: 500px; */
+		display: flex;
+		margin-left: 500px;
+		top: 70px;
+		max-height: 0vh;
+		width: auto;
+	}
+}
 
 .card > h3 {
 	position: absolute;

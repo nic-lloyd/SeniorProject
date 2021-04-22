@@ -1,11 +1,11 @@
-//import React from "react";
 //import * as React from 'react';
-import { person } from "ionicons/icons";
+import { person, informationCircleOutline } from "ionicons/icons";
 import React, { useState } from "react";
 import TinderCard from 'react-tinder-card';
 import "./Cardswipe.css";
 import {businesses} from "../testYelpData.json";
 import {useFetch} from "./hooks";
+import { IonButton, IonFabButton, IonHeader, IonIcon, IonTitle, IonToolbar } from "@ionic/react";
 
 
 const Cardswipe: React.FC = () => {
@@ -140,11 +140,18 @@ const Cardswipe: React.FC = () => {
 
 
                     <div className="container">
+                                <div className="info_button">
+                                        <IonButton  fill="clear" onClick={() => ('Pressed')} color="light" href= {person.url}>
+                                            <IonIcon icon={informationCircleOutline}  size="medium" ></IonIcon>
+                                        </IonButton>
+                                </div>
+
                         <h3 className="restaraunt_name">{person.name}</h3>
                         <p>-------------------------</p>
                         <p>{person.location?.address1}</p>
                         <p className= "location">{person.location?.city}, {person.location?.state}
                         {person.location?.zip_code} </p>
+                                
                     </div>
                 </div>
 
