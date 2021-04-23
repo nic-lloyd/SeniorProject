@@ -14,7 +14,7 @@ const Cardswipe: React.FC = () => {
 
     const swiped = (direction: any, name: any) => {
         console.log("removing: " + name + " " + direction);
-        if (direction == "right"){
+        if (direction == "right") {
             rightSwipe.push(name);
             console.log(rightSwipe);
         }
@@ -23,7 +23,7 @@ const Cardswipe: React.FC = () => {
     useEffect(() => {
         axios.get('../data.json')
             .then(res => {
-                if (res.status != 200){
+                if (res.status != 200) {
                     console.error("No data")
                 }
                 console.log(res)
@@ -36,9 +36,9 @@ const Cardswipe: React.FC = () => {
             <div className="cardSwipe_cardContainer">
                 {businesses.map(business => (
                     <div className="swipe">
-                        <TinderCard  key={business.name} preventSwipe={['up', 'down']}
-                        onSwipe={(dir) => swiped(dir, business.name)}
-                         >
+                        <TinderCard key={business.name} preventSwipe={['up', 'down']}
+                            onSwipe={(dir) => swiped(dir, business.name)}
+                        >
 
                             <div className="card_border">
                                 <div
@@ -54,9 +54,8 @@ const Cardswipe: React.FC = () => {
                                     <h3 className="restaraunt_name">{business.name}</h3>
                                     <hr/>
                                     <p>{business.location?.address1}</p>
-                                    <p className="location">{business.location?.city}, {business.location?.state}
-                                        {business.location?.zip_code}{business.is_open} </p>
-                                        <p className="open">{business.is_open}</p>
+                                    <p className="location">{business.location?.city}, {business.location?.state} {business.location?.zip_code}</p>
+                                    <p className="open">{business.is_open}</p>
                                 </div>
                             </div>
                         </TinderCard>
