@@ -10,7 +10,7 @@ const Matches: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
+        <IonToolbar color="dark">
           <IonTitle>Matches</IonTitle>
         </IonToolbar>
       </IonHeader>

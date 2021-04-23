@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import Setup from "./pages/Setup";
 import Main_page from "./pages/TabContainer/Tab1_Main_page";
 import Land from "./pages/Landing page/Landing page"
-import Matches from "./pages/Matches"
+import Testing from "./pages/Testing"
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -30,6 +30,7 @@ import { home } from "ionicons/icons";
 import TabRoot from "./pages/TabContainer/TabRoot";
 //import App from './App';
 //import Matches from './pages/TabContainer/Tab3_Matches';
+import JoinSession from './components/JoinSession';
 
 
 const App: React.FC = () => (
@@ -49,8 +50,11 @@ const App: React.FC = () => (
          <Route exact path="/land">
            <Land />
          </Route>
-         <Route exact path="/matches">
-           <Matches />
+         <Route exact path="/testing">
+           <Testing />
+         </Route>
+         <Route exact path="/joinsession">
+           <JoinSession />
          </Route>
       {/* <Route path="/" render={() => <Redirect to="/tabs" />} exact={true} /> */}
       </IonRouterOutlet>

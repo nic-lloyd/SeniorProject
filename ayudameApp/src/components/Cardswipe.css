@@ -45,7 +45,6 @@ div.container {
 @media screen and (min-width: 50px) {
 	.info_button {
 		position: relative;
-		/* left: 500px; */
 		display: flex;
 		margin-left: 225px;
 		top: 70px;
@@ -54,13 +53,12 @@ div.container {
 	}
 }
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 800px) {
 	.info_button {
 		position: relative;
-		/* left: 500px; */
 		display: flex;
-		margin-left: 55vw;
-		top: 70px;
+		margin-left: 30vw;
+		top: 10vh;
 		max-height: 0vh;
 		width: auto;
 	}

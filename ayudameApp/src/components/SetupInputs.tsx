@@ -1,25 +1,28 @@
-import { IonList, IonCard, IonItem, IonLabel, IonInput, IonItemDivider, IonRange, IonRadio, IonListHeader, IonRadioGroup, IonRow, IonCol, IonButton, IonToast } from "@ionic/react";
+import { IonList, IonCard, IonItem, IonLabel, IonInput, IonItemDivider, IonRange, IonRadio, IonListHeader, IonRadioGroup, IonRow, IonCol, IonButton, IonToast, IonCheckbox } from "@ionic/react";
 import { useState } from "react";
-import { SetupData, PriceOptions } from "./types";
+import { SetupData} from "./types";
 
 const SetupInputs: React.FC = () => {
 
   const [location, setLocation] = useState<string>();
   const [rangeValue, setRangeValue] = useState(0);
-  const [price, setPrice] = useState<PriceOptions>();
+  const [price, setPrice] = useState<string>();
+  const [checked, setChecked] = useState(false);
 
   const [showToast1, setShowToast1] = useState(false);
   const [showToast2, setShowToast2] = useState(false);
 
 
+
+
   //check for input errors
   //if none, send form inputs to submitInfo({inputs})
-  function checkInfo(location: string | undefined, price: PriceOptions | undefined, range: number | undefined) {
+  function checkInfo(location: string | undefined, price: string | undefined, range: number | undefined, openNow: boolean) {
     if (location === undefined || location === '' || price === undefined || range === undefined) {
       console.log('input error');
       return;
     }
-    submitInfo({ location, price, range })
+    submitInfo({ location, price, range, openNow})
   }
 
   //return JSON object 
@@ -30,7 +33,7 @@ const SetupInputs: React.FC = () => {
 
   return (
 
-    
+
     <IonCard>
 
       {/*Location input */}
@@ -45,12 +48,17 @@ const SetupInputs: React.FC = () => {
         <IonRange min={5} max={25} pin={true} value={rangeValue} onIonChange={e => setRangeValue(e.detail.value as number)} />
       </IonItem>
 
+      <IonItem>
+        <IonLabel>Is Open Now: </IonLabel>
+        <IonCheckbox checked={checked} onIonChange={e => setChecked(e.detail.checked)} />
+      </IonItem>
+
       {/*Price input */}
       <IonList>
         <IonRadioGroup value={price} onIonChange={e => setPrice(e.detail.value)}>
           <IonListHeader>
             <IonLabel>
-              Max Price: {price}
+              Max Price:
             </IonLabel>
           </IonListHeader>
           <IonRow>
@@ -58,19 +66,24 @@ const SetupInputs: React.FC = () => {
             {/*Price Radio Buttons */}
             <IonItem>
               <IonLabel>$</IonLabel>
-              <IonRadio value="$" />
+              <IonRadio value="1" />
             </IonItem>
             <IonItem>
               <IonLabel>$$</IonLabel>
-              <IonRadio value="$$" />
+              <IonRadio value="2" />
             </IonItem>
             <IonItem>
               <IonLabel>$$$</IonLabel>
-              <IonRadio value="$$$" />
+              <IonRadio value="3" />
+            </IonItem>
+            <IonItem>
+              <IonLabel>$$$$</IonLabel>
+              <IonRadio value="4" />
             </IonItem>
           </IonRow>
         </IonRadioGroup>
       </IonList>
+
 
       {/*New Code button*/}
       <IonButton onClick={() => setShowToast1(true)} expand="block">Get new code</IonButton>
@@ -81,7 +94,7 @@ const SetupInputs: React.FC = () => {
         duration={1000}
       />
       {/*Button */}
-      <IonButton onClick={() => checkInfo(location, price, rangeValue)} expand="block">Save</IonButton>
+      <IonButton onClick={() => checkInfo(location, price, rangeValue, checked)} expand="block">Save</IonButton>
 
     </IonCard>
   );

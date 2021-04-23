@@ -1,9 +1,7 @@
-//import * as React from 'react';
 import { person, informationCircleOutline } from "ionicons/icons";
 import React, { useEffect, useState } from "react";
 import TinderCard from 'react-tinder-card';
 import "./Cardswipe.css";
-import {useFetch} from "./hooks";
 import { IonButton, IonFabButton, IonHeader, IonIcon, IonTitle, IonToolbar } from "@ionic/react";
 import axios from 'axios'
 

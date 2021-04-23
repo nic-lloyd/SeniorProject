@@ -30,14 +30,16 @@ header .logo {
 	font-weight: 700;
 	color: #fff;
 	float: left;
+	font-family: 'nunito';
+	padding: 2vh 5vh;
 }
 
-header .menu {
+/* header .menu {
 	float: right;
 	margin-top: 5px;
-}
+} */
 
-header ul li {
+/* header ul li {
 	display: inline-block;
 }
 
@@ -48,31 +50,41 @@ header ul li a {
 	margin: 0 25px;
 	font-weight: 300;
 	letter-spacing: 1px;
-}
+} */
 
 .content {
 	text-align: center;
-	padding: 200px 80px 0;
+	padding: 200px 10px 0;
 	color: #fff;
+	font-family: 'nunito';
 }
 .content h1 {
-	font-size: 40px;
+	font-size: 4.5rem;
 }
 .content p {
-	font-size: 30px;
+	font-size: 4.5rem;
 	padding: 0px 0;
 	font-weight: 300;
+	line-height: 0vh;
+}
+.green {
+	color: #5aff3d;
 }
 .content .btn-group {
 	margin-top: 45px;
 }
 .content a {
 	display: inline-block;
-	padding: 15px 45px;
+	padding: 20px 45px;
 	text-decoration: none;
 	color: #fff;
 	border-radius: 50px;
+	margin: 2vh;
 }
 .content a.color1 {
-	background-color: aqua;
+	background-color: #5aff3d;
+}
+.content a.color2 {
+	background-color: #fff;
+	color: black;
 }

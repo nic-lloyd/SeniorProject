@@ -7,7 +7,7 @@ const Friends: React.FC = () => {
   return (
     <IonPage>
 <IonHeader>
-        <IonToolbar>
+        <IonToolbar color="dark">
           <IonTitle>Friends</IonTitle>
         </IonToolbar>
       </IonHeader>
