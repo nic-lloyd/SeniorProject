@@ -18,17 +18,16 @@ const Cardswipe: React.FC = () => {
             rightSwipe.push(name);
             console.log(rightSwipe);
         }
-        else{
-            
-        }
-        /* setLastDirection(direction); */
     };
 
     useEffect(() => {
         axios.get('../data.json')
             .then(res => {
+                if (res.status != 200){
+                    console.error("No data")
+                }
                 console.log(res)
-                setBusinesses(res.data)
+                setBusinesses(res.data.businesses)
             })
     }, []);
 
@@ -53,7 +52,7 @@ const Cardswipe: React.FC = () => {
                                         </IonButton>
                                     </div>
                                     <h3 className="restaraunt_name">{business.name}</h3>
-                                    <p>-------------------------</p>
+                                    <hr/>
                                     <p>{business.location?.address1}</p>
                                     <p className="location">{business.location?.city}, {business.location?.state}
                                         {business.location?.zip_code}{business.is_open} </p>
