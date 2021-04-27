@@ -1,9 +1,23 @@
-.Header {
+/* .Header {
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
+	text-align: center;
 	border-bottom: 1px solid #f9f9f9;
-}
+	background-color: #222428;
+} */
 .header_icon {
-	padding: 20px;
+	padding: 10px;
+}
+
+.Header {
+	padding: 1px;
+	text-align: center;
+	background: #222428;
+	color: white;
+	font-family: 'nunito';
+}
+
+.Header em {
+	color: #5aff3d;
+	font-family: 'nunito';
 }

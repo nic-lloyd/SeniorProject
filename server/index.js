@@ -7,6 +7,14 @@ var axios = require("axios");
 
 const prisma = new PrismaClient();
 app.use(express.json());
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "http://localhost:8100"); // update to match the domain you will make the request from
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
 /**
  * create axios instance for connection with the
@@ -98,6 +106,22 @@ apiRouter.get(
   }
 );
 
+apiRouter.get("/:sessionId/restaurants", async (req, res) => {
+  let result;
+
+  try {
+    result = await prisma.sessionRestaurant.findMany({
+      where: {
+        sessionId: req.params.sessionId,
+      },
+    });
+  } catch (e) {
+    console.log(e);
+  }
+
+  res.json(result);
+});
+
 /**
  * User casts vote for a restaurant
  */
@@ -144,7 +168,8 @@ apiRouter.post("/addUser", async (req, res) => {
  */
 apiRouter.post("/:sessionId/addRestaurant", async (req, res) => {
   const { sessionId } = req.params;
-  const restaurantId = req.body.restaurantId;
+  const restaurantId = req.body.data.restaurantId;
+  console.log(req.body);
   const result = await prisma.sessionRestaurant.create({
     data: {
       sessionId: sessionId,
@@ -192,22 +217,24 @@ apiRouter.put("/updateName/:id", async (req, res) => {
  */
 apiRouter.get("/yelp", async (req, res) => {
   const { location, radius, price, open_now } = req.query;
-  const result = await yelpREST("/businesses/search", {
-    params: {
-      location: location,
-      categories: "restaurants",
-      open_now: open_now,
-      radius: radius,
-      price: price,
-    },
-  })
-    .then(({ data }) => {
-      return data;
-    })
-    .catch((err) => {
-      console.log(err);
+
+  let result;
+  try {
+    result = await yelpREST("/businesses/search", {
+      params: {
+        location: location,
+        categories: "restaurants",
+        open_now: open_now,
+        radius: radius,
+        price: price,
+        limit: 10,
+      },
     });
-  res.json(result);
+  } catch (e) {
+    console.log(e);
+  }
+
+  res.json(result.data);
 });
 
 /**
@@ -226,6 +253,7 @@ apiRouter.get("/yelp/:businessId", async (req, res) => {
     .catch((err) => {
       console.log(err);
     });
+  console.log("/yelp/:businessId");
   res.json(result);
 });
 
