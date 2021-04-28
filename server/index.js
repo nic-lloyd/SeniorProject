@@ -13,6 +13,7 @@ app.use(function (req, res, next) {
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
   );
+  res.header("Access-Control-Allow-Methods", "POST, PUT, GET, DELETE");
   next();
 });
 
@@ -106,6 +107,9 @@ apiRouter.get(
   }
 );
 
+/**
+ * Get the restaurants in a session
+ */
 apiRouter.get("/:sessionId/restaurants", async (req, res) => {
   let result;
 
@@ -128,6 +132,43 @@ apiRouter.get("/:sessionId/restaurants", async (req, res) => {
 apiRouter.get("/test", async (req, res) => {
   const result = await prisma.userRestaurant.findMany();
   res.json(result);
+});
+
+apiRouter.get("/:sessionId/matches", async (req, res) => {
+  const sessionId = req.params.sessionId;
+  let finalResult = [];
+  const sessionData = await prisma.sessionRestaurant.findMany({
+    where: {
+      sessionId: sessionId,
+    },
+  });
+
+  for (let data of sessionData) {
+    let result;
+    if (data.votes > 0) {
+      try {
+        result = await yelpREST(`/businesses/${data.restaurantId}`, {
+          params: {
+            locale: "en_US",
+          },
+        });
+      } catch (e) {
+        console.log("error");
+        console.log(e);
+      }
+      finalResult.push({
+        sessionId: sessionId,
+        restaurantId: data.restaurantId,
+        votes: data.votes,
+        name: result.data.name,
+        image_url: result.data.image_url,
+        url: result.data.url,
+      });
+    }
+  }
+  console.log(finalResult);
+
+  res.json(finalResult);
 });
 
 /**
@@ -181,6 +222,11 @@ apiRouter.post("/:sessionId/addRestaurant", async (req, res) => {
   res.json(result);
 });
 
+/**
+ * Cast a vote from a user
+ * (Not ready to implement yet)
+ * This is so stupid right now don't even look at it
+ */
 apiRouter.post("/:sessionId/vote", async (req, res) => {
   const { sessionId } = req.params;
   const { userId, restaurantId, vote } = req.query;
@@ -193,6 +239,31 @@ apiRouter.post("/:sessionId/vote", async (req, res) => {
     },
   });
   console.log(`[${sessionId}]: User [${userId}] voted on [${restaurantId}]`);
+  res.json(result);
+});
+
+/**
+ * Increment the number of votes that a restaurant has in a given session
+ * This works now LETS GOOOO
+ */
+apiRouter.put("/:sessionid/:restaurantid/incrementVote", async (req, res) => {
+  const { sessionid, restaurantid } = req.params;
+  const result = await prisma.sessionRestaurant.update({
+    where: {
+      sessionId_restaurantId: {
+        sessionId: sessionid,
+        restaurantId: restaurantid,
+      },
+    },
+    data: {
+      votes: {
+        increment: 1,
+      },
+    },
+  });
+  console.log(
+    `Updated votes of [${restaurantid}] in [${sessionid}]: ${result.votes}`
+  );
   res.json(result);
 });
 

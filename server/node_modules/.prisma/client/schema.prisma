@@ -8,17 +8,20 @@ datasource db {
 }
 
 model session {
-  sessionId         String             @id @db.VarChar(20)
-  dateCreated       DateTime?          @db.DateTime(0)
-  sessionRestaurant sessionRestaurant?
+  sessionId         String              @id @db.VarChar(20)
+  dateCreated       DateTime?           @default(now()) @db.DateTime(0)
+  sessionRestaurant sessionRestaurant[]
   sessionUsers      sessionUsers[]
+  userRestaurant    userRestaurant[]
 }
 
 model sessionRestaurant {
-  sessionId    String  @id @db.VarChar(20)
-  restaurantId String? @db.VarChar(45)
+  sessionId    String  @db.VarChar(20)
+  restaurantId String  @db.VarChar(45)
   votes        Int?
   session      session @relation(fields: [sessionId], references: [sessionId])
+
+  @@id([sessionId, restaurantId])
 }
 
 model sessionUsers {
@@ -39,8 +42,12 @@ model user {
 }
 
 model userRestaurant {
-  userId       Int     @id
-  restaurantId String? @db.VarChar(45)
-  vote         Bytes?  @db.Binary(1)
-  user         user    @relation(fields: [userId], references: [userId])
+  userId       Int      @id
+  restaurantId String?  @db.VarChar(45)
+  vote         Int?
+  sessionId    String?  @db.VarChar(20)
+  session      session? @relation(fields: [sessionId], references: [sessionId])
+  user         user     @relation(fields: [userId], references: [userId])
+
+  @@index([sessionId], name: "userRestaurant_sessionId_fk_idx")
 }
