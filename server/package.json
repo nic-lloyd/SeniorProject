@@ -9,11 +9,12 @@
   "author": "Nicolas Lloyd, Matthew Popola, Andrew Orbine",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^2.19.0",
+    "@prisma/client": "^2.21.2",
     "axios": "^0.21.1",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mysql": "github:mysqljs/mysql"
   },
   "devDependencies": {
-    "prisma": "^2.19.0"
+    "prisma": "^2.21.2"
   }
 }

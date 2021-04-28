@@ -7,6 +7,15 @@ var axios = require("axios");
 
 const prisma = new PrismaClient();
 app.use(express.json());
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "http://localhost:8100"); // update to match the domain you will make the request from
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.header("Access-Control-Allow-Methods", "POST, PUT, GET, DELETE");
+  next();
+});
 
 /**
  * create axios instance for connection with the
@@ -14,9 +23,8 @@ app.use(express.json());
  * (Yealp API Documentation: https://www.yelp.com/developers/documentation/v3/business_search)
  */
 const API_KEY = process.env.YELP_API_KEY;
-console.log(API_KEY);
-const yelpREST = axios.create({
-  baseURL: "https://api.yelp.com/v3",
+let yelpREST = axios.create({
+  baseURL: "https://api.yelp.com/v3/",
   headers: {
     Authorization: `Bearer ${API_KEY}`,
     "Content-type": "application/json",
@@ -37,11 +45,11 @@ apiRouter.get("/sessions", async (req, res) => {
 /**
  * GET request for a single session in the session table
  */
-apiRouter.get("/sessions/:id", async (req, res) => {
-  const { id } = req.params;
+apiRouter.get("/sessions/:sessionId", async (req, res) => {
+  const { sessionId } = req.params;
   const session = await prisma.session.findUnique({
     where: {
-      sessionId: id,
+      sessionId: sessionId,
     },
   });
 
@@ -51,15 +59,116 @@ apiRouter.get("/sessions/:id", async (req, res) => {
 });
 
 /**
- * Add a user to a given
+ * GET users from a given session
  */
-apiRouter.get("/users/:sessionId", async (req, res) => {
+apiRouter.get("/sessions/:sessionId/users", async (req, res) => {
   const { id } = req.params;
   const result = await prisma.sessionUsers.findMany({
     where: { sessionId: id },
+    // select: { userId: true },
   });
   console.log(result.length + " records found.");
   res.json(result);
+});
+
+/**
+ * GET number of votes a user has cast
+ * ########FIX THIS#########
+ */
+apiRouter.get("/sessions/:sessionId/:userId/numVotes", async (req, res) => {
+  const { sessionId, userId } = req.params;
+  const result = await prisma.userRestaurant.findMany({
+    where: {
+      userId: parseInt(userId),
+      sessionId: sessionId,
+    },
+  });
+  console.log(result);
+  res.json(result.length);
+});
+
+/**
+ * GET number of positive votes on a restaurant
+ */
+apiRouter.get(
+  "/sessions/:sessionId/:restaurantId/numVotes",
+  async (req, res) => {
+    const { sessionId, restaurantId } = req.params;
+    const result = await prisma.userRestaurant.findMany({
+      where: {
+        sessionId: sessionId,
+        restaurantId: restaurantId,
+        vote: {
+          gt: 0,
+        },
+      },
+    });
+    res.json(result);
+  }
+);
+
+/**
+ * Get the restaurants in a session
+ */
+apiRouter.get("/:sessionId/restaurants", async (req, res) => {
+  let result;
+
+  try {
+    result = await prisma.sessionRestaurant.findMany({
+      where: {
+        sessionId: req.params.sessionId,
+      },
+    });
+  } catch (e) {
+    console.log(e);
+  }
+
+  res.json(result);
+});
+
+/**
+ * User casts vote for a restaurant
+ */
+apiRouter.get("/test", async (req, res) => {
+  const result = await prisma.userRestaurant.findMany();
+  res.json(result);
+});
+
+apiRouter.get("/:sessionId/matches", async (req, res) => {
+  const sessionId = req.params.sessionId;
+  let finalResult = [];
+  const sessionData = await prisma.sessionRestaurant.findMany({
+    where: {
+      sessionId: sessionId,
+    },
+  });
+
+  for (let data of sessionData) {
+    let result;
+    if (data.votes > 0) {
+      try {
+        result = await yelpREST(`/businesses/${data.restaurantId}`, {
+          params: {
+            locale: "en_US",
+          },
+        });
+      } catch (e) {
+        console.log("error");
+        console.log(e);
+      }
+      finalResult.push({
+        sessionId: sessionId,
+        restaurantId: data.restaurantId,
+        votes: data.votes,
+        name: result.data.name,
+        image_url: result.data.image_url,
+        url: result.data.url,
+      });
+    }
+  }
+  console.log(finalResult);
+
+  res.json(finalResult);
 });
 
 /**
@@ -95,6 +204,70 @@ apiRouter.post("/addUser", async (req, res) => {
 });
 
 /**
+ * Add restaurant to a session.
+ * TODO: Add check to make sure session exists
+ */
+apiRouter.post("/:sessionId/addRestaurant", async (req, res) => {
+  const { sessionId } = req.params;
+  const restaurantId = req.body.data.restaurantId;
+  console.log(req.body);
+  const result = await prisma.sessionRestaurant.create({
+    data: {
+      sessionId: sessionId,
+      restaurantId: restaurantId,
+      votes: 0,
+    },
+  });
+  console.log(`New restaurant (${restaurantId}) added to session ${sessionId}`);
+  res.json(result);
+});
+
+/**
+ * Cast a vote from a user
+ * (Not ready to implement yet)
+ * This is so stupid right now don't even look at it
+ */
+apiRouter.post("/:sessionId/vote", async (req, res) => {
+  const { sessionId } = req.params;
+  const { userId, restaurantId, vote } = req.query;
+  const result = await prisma.userRestaurant.create({
+    data: {
+      sessionId: sessionId,
+      userId: userId,
+      restauratntId: restaurantId,
+      vote: vote,
+    },
+  });
+  console.log(`[${sessionId}]: User [${userId}] voted on [${restaurantId}]`);
+  res.json(result);
+});
+
+/**
+ * Increment the number of votes that a restaurant has in a given session
+ * This works now LETS GOOOO
+ */
+apiRouter.put("/:sessionid/:restaurantid/incrementVote", async (req, res) => {
+  const { sessionid, restaurantid } = req.params;
+  const result = await prisma.sessionRestaurant.update({
+    where: {
+      sessionId_restaurantId: {
+        sessionId: sessionid,
+        restaurantId: restaurantid,
+      },
+    },
+    data: {
+      votes: {
+        increment: 1,
+      },
+    },
+  });
+  console.log(
+    `Updated votes of [${restaurantid}] in [${sessionid}]: ${result.votes}`
+  );
+  res.json(result);
+});
+
+/**
  * PUT request to update a single user's display name
  */
 apiRouter.put("/updateName/:id", async (req, res) => {
@@ -107,28 +280,51 @@ apiRouter.put("/updateName/:id", async (req, res) => {
 });
 
 /**
+ * ##### YELP PROXY REQUESTS #####
+ */
+
+/**
  * Proxy GET request for initial query to the Yelp API
- * !!!!!!!!!!!!!!
- * This isnt working. Getting unhandled promise error.
- * !!!!!!!!!!!!!!
  */
 apiRouter.get("/yelp", async (req, res) => {
-  const { location, radius, price } = req.params;
-  var result;
-  yelpREST
-    .get("/business/search", {
+  const { location, radius, price, open_now } = req.query;
+
+  let result;
+  try {
+    result = await yelpREST("/businesses/search", {
       params: {
         location: location,
+        categories: "restaurants",
+        open_now: open_now,
         radius: radius,
         price: price,
+        limit: 10,
       },
-    })
-    .then(({ data }) => {
-      result = data; //Not sure why this isnt working
-      businesses.forEach((b) => {
-        console.log("Name: ", b.name);
-      });
     });
+  } catch (e) {
+    console.log(e);
+  }
+
+  res.json(result.data);
+});
+
+/**
+ * Proxy GET request to grab specific businesses from the Yelp API
+ */
+apiRouter.get("/yelp/:businessId", async (req, res) => {
+  const { businessId } = req.params;
+  const result = await yelpREST(`/businesses/${businessId}`, {
+    params: {
+      locale: "en_US",
+    },
+  })
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  console.log("/yelp/:businessId");
   res.json(result);
 });
 
