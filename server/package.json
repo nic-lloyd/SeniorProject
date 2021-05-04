@@ -1,0 +1,20 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "senior project backend",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Nicolas Lloyd, Matthew Popola, Andrew Orbine",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^2.21.2",
+    "axios": "^0.21.1",
+    "express": "^4.17.1",
+    "mysql": "github:mysqljs/mysql"
+  },
+  "devDependencies": {
+    "prisma": "^2.22.0"
+  }
+}

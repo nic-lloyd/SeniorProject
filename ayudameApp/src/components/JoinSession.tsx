@@ -9,8 +9,10 @@ import {
   IonCard,
 } from "@ionic/react";
 
+
 const JoinSession: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
+  const [sessionId, setSessionId] = useState<string>();
 
   return (
     <div>
@@ -18,9 +20,14 @@ const JoinSession: React.FC = () => {
         <IonCard>
           <IonItem className="ion-text-center ion-margin-top">
             <IonLabel position="floating">Session Code</IonLabel>
-            <IonInput></IonInput>
+            <IonInput
+              value={sessionId}
+              onIonChange={(e) => setSessionId(e.detail.value!)}
+            ></IonInput>
           </IonItem>
-          <IonButton expand="block">Join Session</IonButton>
+          {/* <IonButton expand="block" onClick={() => checkSession(sessionId)}>
+            Join Session
+          </IonButton> */}
         </IonCard>
         <IonButton expand="block" onClick={() => setShowModal(false)}>
           Close

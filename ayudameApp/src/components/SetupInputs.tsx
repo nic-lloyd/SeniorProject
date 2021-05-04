@@ -1,68 +1,102 @@
-import { IonList, IonCard, IonItem, IonLabel, IonInput, IonItemDivider, IonRange, IonRadio, IonListHeader, IonRadioGroup, IonRow, IonCol, IonButton, IonToast, IonCheckbox } from "@ionic/react";
+import {
+  IonList,
+  IonCard,
+  IonItem,
+  IonLabel,
+  IonInput,
+  IonItemDivider,
+  IonRange,
+  IonRadio,
+  IonListHeader,
+  IonRadioGroup,
+  IonRow,
+  IonCol,
+  IonButton,
+  IonToast,
+  IonCheckbox,
+} from "@ionic/react";
 import { useState } from "react";
-import { SetupData} from "./types";
+import { SetupData } from "./types";
+
+let inputs: SetupData;
 
 const SetupInputs: React.FC = () => {
-
   const [location, setLocation] = useState<string>();
-  const [rangeValue, setRangeValue] = useState(0);
+  const [rangeValue, setRangeValue] = useState(5);
   const [price, setPrice] = useState<string>();
-  const [checked, setChecked] = useState(false);
-
-  const [showToast1, setShowToast1] = useState(false);
-  const [showToast2, setShowToast2] = useState(false);
-
-
-
+  const [open_now, setOpen_now] = useState(false);
 
   //check for input errors
   //if none, send form inputs to submitInfo({inputs})
-  function checkInfo(location: string | undefined, price: string | undefined, range: number | undefined, openNow: boolean) {
-    if (location === undefined || location === '' || price === undefined || range === undefined) {
-      console.log('input error');
-      return;
+  function checkInfo(
+    location: string | undefined,
+    price: string | undefined,
+    range: string | undefined,
+    open_now: boolean
+  ) {
+    if (location === undefined || location === "") {
+      console.log("Invalid Location");
+      return false;
     }
-    submitInfo({ location, price, range, openNow})
+    if (price === undefined) {
+      price = "1,2,3,4";
+    }
+    if (range === undefined || parseInt(range) === 0) {
+      range = "20000";
+    }
+
+    inputs = { location, price, range, open_now };
+    submitInfo({ location, price, range, open_now });
   }
 
-  //return JSON object 
+  //return JSON object
   async function submitInfo(setupData: SetupData) {
-
+    let rangeInMeters = parseInt(setupData.range) * 1609.34; //convert range from miles to meters
+    setupData.range = rangeInMeters.toString();
     console.log(setupData);
   }
 
   return (
-
-
     <IonCard>
-
       {/*Location input */}
       <IonItemDivider>Search Area</IonItemDivider>
       <IonItem>
-        <IonInput value={location} placeholder="Enter Location" onIonChange={e => setLocation(e.detail.value!)}></IonInput>
+        <IonInput
+          value={location}
+          placeholder="City, State OR zip code"
+          onIonChange={(e) => setLocation(e.detail.value!)}
+        ></IonInput>
       </IonItem>
 
       {/*Range input */}
-      <IonItemDivider>Range: {rangeValue}</IonItemDivider>
+      <IonItemDivider>Range(miles): {rangeValue}</IonItemDivider>
       <IonItem>
-        <IonRange min={5} max={25} pin={true} value={rangeValue} onIonChange={e => setRangeValue(e.detail.value as number)} />
+        <IonRange
+          min={5}
+          max={25}
+          pin={true}
+          value={rangeValue}
+          onIonChange={(e) => setRangeValue(e.detail.value as number)}
+        />
       </IonItem>
-
       <IonItem>
-        <IonLabel>Is Open Now: </IonLabel>
-        <IonCheckbox checked={checked} onIonChange={e => setChecked(e.detail.checked)} />
+        <IonCheckbox
+          checked={open_now}
+          onIonChange={(e) => setOpen_now(e.detail.checked)}
+        />
+        <IonLabel>Open Now</IonLabel>
       </IonItem>
 
       {/*Price input */}
       <IonList>
-        <IonRadioGroup value={price} onIonChange={e => setPrice(e.detail.value)}>
+        <IonRadioGroup
+          value={price}
+          onIonChange={(e) => setPrice(e.detail.value)}
+        >
           <IonListHeader>
-            <IonLabel>
-              Max Price:
-            </IonLabel>
+            <IonLabel>Max Price: {price}</IonLabel>
           </IonListHeader>
           <IonRow>
-
             {/*Price Radio Buttons */}
             <IonItem>
               <IonLabel>$</IonLabel>
@@ -70,36 +104,31 @@ const SetupInputs: React.FC = () => {
             </IonItem>
             <IonItem>
               <IonLabel>$$</IonLabel>
-              <IonRadio value="2" />
+              <IonRadio value="1,2" />
             </IonItem>
             <IonItem>
               <IonLabel>$$$</IonLabel>
-              <IonRadio value="3" />
+              <IonRadio value="1,2,3" />
             </IonItem>
             <IonItem>
               <IonLabel>$$$$</IonLabel>
-              <IonRadio value="4" />
+              <IonRadio value="1,2,3,4" />
             </IonItem>
           </IonRow>
         </IonRadioGroup>
       </IonList>
-
-
-      {/*New Code button*/}
-      <IonButton onClick={() => setShowToast1(true)} expand="block">Get new code</IonButton>
-      <IonToast
-        isOpen={showToast1}
-        onDidDismiss={() => setShowToast1(false)}
-        message="Code Generated"
-        duration={1000}
-      />
       {/*Button */}
-      <IonButton onClick={() => checkInfo(location, price, rangeValue, checked)} expand="block">Save</IonButton>
-
+      <IonButton
+        onClick={() => {
+          checkInfo(location, price, rangeValue.toString(), open_now);
+        }}
+        expand="block"
+      >
+        Save
+      </IonButton>
     </IonCard>
   );
 };
 
-
-
 export default SetupInputs;
+export { inputs };

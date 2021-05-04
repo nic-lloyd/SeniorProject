@@ -1,4 +1,5 @@
- [
+{
+    "businesses": [
         {
             "id": "IgbdOtvMhL_wl659vHIZ9A",
             "alias": "lascalas-fire-glassboro-glassboro",
@@ -894,4 +895,12 @@
             "display_phone": "(856) 582-8586",
             "distance": 4097.698121891709
         }
-    ]
+    ],
+    "total": 308,
+    "region": {
+        "center": {
+            "longitude": -75.11129379272461,
+            "latitude": 39.71022118210975
+        }
+    }
+}

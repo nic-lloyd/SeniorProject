@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model session {
+  sessionId         String              @id @db.VarChar(20)
+  dateCreated       DateTime?           @default(now()) @db.DateTime(0)
+  sessionRestaurant sessionRestaurant[]
+  sessionUsers      sessionUsers[]
+  userRestaurant    userRestaurant[]
+}
+
+model sessionRestaurant {
+  sessionId    String  @db.VarChar(20)
+  restaurantId String  @db.VarChar(45)
+  votes        Int?
+  session      session @relation(fields: [sessionId], references: [sessionId])
+
+  @@id([sessionId, restaurantId])
+}
+
+model sessionUsers {
+  sessionId String  @db.VarChar(20)
+  userId    Int
+  session   session @relation(fields: [sessionId], references: [sessionId])
+  user      user    @relation(fields: [userId], references: [userId])
+
+  @@id([sessionId, userId])
+  @@index([userId], name: "sessionUsers_userId_fk_idx")
+}
+
+model user {
+  userId         Int             @id
+  name           String?         @db.VarChar(45)
+  sessionUsers   sessionUsers[]
+  userRestaurant userRestaurant?
+}
+
+model userRestaurant {
+  userId       Int      @id
+  restaurantId String?  @db.VarChar(45)
+  vote         Int?
+  sessionId    String?  @db.VarChar(20)
+  session      session? @relation(fields: [sessionId], references: [sessionId])
+  user         user     @relation(fields: [userId], references: [userId])
+
+  @@index([sessionId], name: "userRestaurant_sessionId_fk_idx")
+}
