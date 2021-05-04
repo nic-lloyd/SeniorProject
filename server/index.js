@@ -90,9 +90,7 @@ apiRouter.get("/sessions/:sessionId/:userId/numVotes", async (req, res) => {
 /**
  * GET number of positive votes on a restaurant
  */
-apiRouter.get(
-  "/sessions/:sessionId/:restaurantId/numVotes",
-  async (req, res) => {
+apiRouter.get("/sessions/:sessionId/:restaurantId/numVotes", async (req, res) => {
     const { sessionId, restaurantId } = req.params;
     const result = await prisma.userRestaurant.findMany({
       where: {
