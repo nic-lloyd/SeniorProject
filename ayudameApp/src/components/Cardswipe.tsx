@@ -19,7 +19,7 @@ function Cardswipe() {
     }, []);
 
     return (
-    <div >
+    <div className="background">
         <div className="cardSwipe_cardContainer">
         {businesses.map(business => (
             <div className="swipe">
@@ -30,7 +30,6 @@ function Cardswipe() {
                         style={{ backgroundImage: `url(${business.image_url})`}}
                         className= "card">
                         
-                        {/* <h3>{person.name}</h3> */}
                         
                     </div>
 
@@ -45,7 +44,7 @@ function Cardswipe() {
                         <h3 className="restaraunt_name">{business.name}</h3>
                         <p>-------------------------</p>
                         <p>{business.location?.address1}</p>
-                        <p className= "location">{business.location?.city}, {business.location?.state}
+                        <p className= "location">{business.location?.city}, {business.location?.state}&nbsp;
                         {business.location?.zip_code} </p>
                                 
                     </div>
