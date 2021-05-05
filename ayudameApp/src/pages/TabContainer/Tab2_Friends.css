@@ -1,0 +1,12 @@
+.sub-header {
+    padding: 2px;
+	text-align: center;
+	background: white;
+	color: black;
+	font-family: 'nunito';
+}
+
+.share-button {
+	background: green;
+	text-align: center;
+}

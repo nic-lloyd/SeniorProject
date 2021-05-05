@@ -6,9 +6,9 @@ const Settings: React.FC = () => {
     return (
       <IonPage>
         <IonContent>
-        <IonButton expand="full">Change Display Name</IonButton>
-        <IonButton expand="full">FAQ</IonButton>
-        <IonButton expand="full">Filters</IonButton>
+        <IonButton color="success" expand="full">Change Display Name</IonButton>
+        <IonButton color="success" expand="full">FAQ</IonButton>
+        <IonButton color="success" expand="full">Filters</IonButton>
         <IonButton expand="full" color="danger">End Session</IonButton>
 
       </IonContent>
