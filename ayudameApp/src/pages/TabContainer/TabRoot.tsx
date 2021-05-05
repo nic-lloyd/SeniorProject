@@ -13,7 +13,7 @@ import Main_page from "./Tab1_Main_page";
 import Friends from "./Tab2_Friends";
 import Matches from "./Tab3_Matches";
 import Settings from "./Tab4_Settings";
-import "./TabRoot.css";
+
 
 const sessionId = window.location.pathname.split("/").slice(-1)[0];
 console.log(sessionId);

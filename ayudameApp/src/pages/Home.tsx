@@ -72,19 +72,19 @@ const Home: React.FC = () => {
 
     {/* join session pop up card  */}
     <IonModal isOpen={showModal}>
-        <IonCard>
+        <IonCard color="medium">
           <IonItem className="ion-text-center ion-margin-top">
-            <IonLabel position="floating">Session Code</IonLabel>
+            <IonLabel color="dark" position="floating">Session Code</IonLabel>
             <IonInput
               value={sessionId}
               onIonChange={(e) => setSessionId(e.detail.value!)}
             ></IonInput>
           </IonItem>
-          <IonButton expand="block" onClick={() => checkSession(sessionId)}>
+          <IonButton color="dark" expand="block" onClick={() => checkSession(sessionId)}>
             Join Session
           </IonButton>
         </IonCard>
-        <IonButton expand="block" onClick={() => setShowModal(false)}>
+        <IonButton color="dark" expand="block" onClick={() => setShowModal(false)}>
           Close
         </IonButton>
       </IonModal>

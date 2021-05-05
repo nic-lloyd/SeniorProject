@@ -86,5 +86,10 @@ div.container {
 }
 
 .background {
-	background-image: linear-gradient(to right, red, green);
+	background-image: linear-gradient(
+		90deg,
+		#ff1717 0%,
+		rgba(0, 0, 0, 0.83) 50%,
+		#5aff3d 100%
+	);
 }
