@@ -92,7 +92,8 @@ const Cardswipe: React.FC = (props) => {
                       <p>-------------------------</p>
                       <p>{business.location?.address1}</p>
                       <p className="location">
-                        {business.location?.city}, {business.location?.state}&nbsp;
+                        {business.location?.city}, {business.location?.state}
+                        &nbsp;
                         {business.location?.zip_code}{" "}
                       </p>
                     </div>
@@ -101,6 +102,9 @@ const Cardswipe: React.FC = (props) => {
               </div>
             );
           })}
+        <h1 style={{ textAlign: "center" }}>
+          That's all, check out the matches page to view the results!
+        </h1>
       </div>
     </div>
   );
