@@ -1,14 +1,20 @@
 import { Redirect, Route } from "react-router-dom";
 import {
   IonApp,
+  IonContent,
+  IonLabel,
+  IonPage,
   IonRouterOutlet,
+  IonTabBar,
+  IonTabButton,
+  IonTabs,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import Home from "./pages/Home";
 import Setup from "./pages/Setup";
 import Main_page from "./pages/TabContainer/Tab1_Main_page";
 import Land from "./pages/Landing page/Landing page";
-
+import Matches from "./pages/Matches";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -32,7 +38,6 @@ import React from "react";
 import TabRoot from "./pages/TabContainer/TabRoot";
 import Testing from './pages/Testing';
 
-
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
@@ -53,6 +58,10 @@ const App: React.FC = () => (
         <Route exact path="/testing">
           <Testing />
         </Route>
+        <Route exact path="/matches">
+          <Matches />
+        </Route>
+        {/* <Route path="/" render={() => <Redirect to="/tabs" />} exact={true} /> */}
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

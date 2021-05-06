@@ -6,7 +6,6 @@ var apiRouter = express.Router();
 var axios = require("axios");
 
 const prisma = new PrismaClient();
-console.log("testtttttttt")
 app.use(express.json());
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "http://localhost:8100"); // update to match the domain you will make the request from

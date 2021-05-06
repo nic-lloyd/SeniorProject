@@ -62,27 +62,28 @@ div.container {
 		max-height: 0vh;
 		width: auto;
 	}
+
 }
 
 .card > h3 {
-	position: absolute;
-	bottom: 10px;
-	color: white;
+  position: absolute;
+  bottom: 10px;
+  color: white;
 }
 
 .cardSwipe_cardContainer {
-	display: flex;
-	justify-content: center;
-	margin-top: 5vh;
+  display: flex;
+  justify-content: center;
+  margin-top: 5vh;
 }
 
 .swipe {
-	position: absolute;
+  position: absolute;
 }
 
 .h1 {
-	position: relative;
-	text-align: center;
+  position: relative;
+  text-align: center;
 }
 
 .background {
