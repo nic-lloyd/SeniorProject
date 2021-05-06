@@ -1,14 +1,14 @@
 import React from "react";
 import { IonButton, IonIcon, IonContent, IonPage } from '@ionic/react';
-import { star } from 'ionicons/icons';
+import "./backgroundStyle.css"
 
 const Settings: React.FC = () => {
     return (
-      <IonPage>
+      <IonPage color="light">
         <IonContent>
-        <IonButton color="success" expand="full">Change Display Name</IonButton>
-        <IonButton color="success" expand="full">FAQ</IonButton>
-        <IonButton color="success" expand="full">Filters</IonButton>
+        <IonButton expand="full" color="dark">Change Display Name</IonButton>
+        <IonButton expand="full" color="dark">FAQ</IonButton>
+        <IonButton expand="full" color="dark">Filters</IonButton>
         <IonButton expand="full" color="danger">End Session</IonButton>
 
       </IonContent>

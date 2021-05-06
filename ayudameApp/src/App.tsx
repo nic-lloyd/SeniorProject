@@ -35,10 +35,8 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import "./theme/variables.css";
 import React from "react";
-import { home } from "ionicons/icons";
 import TabRoot from "./pages/TabContainer/TabRoot";
-//import App from './App';
-//import Matches from './pages/TabContainer/Tab3_Matches';
+import Testing from './pages/Testing';
 
 const App: React.FC = () => (
   <IonApp>
@@ -56,6 +54,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/land">
           <Land />
+        </Route>
+        <Route exact path="/testing">
+          <Testing />
         </Route>
         <Route exact path="/matches">
           <Matches />

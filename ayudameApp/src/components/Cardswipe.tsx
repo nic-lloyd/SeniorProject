@@ -1,4 +1,4 @@
-import { person, informationCircleOutline, thumbsDownOutline, thumbsUpOutline } from "ionicons/icons";
+import { person, informationCircleOutline } from "ionicons/icons";
 import { IonButton, IonIcon } from "@ionic/react";
 import React, { useEffect, useState } from "react";
 import TinderCard from "react-tinder-card";
@@ -84,19 +84,15 @@ const Cardswipe: React.FC = (props) => {
                         >
                           <IonIcon
                             icon={informationCircleOutline}
-                            size="large"
+                            size="medium"
                           ></IonIcon>
                         </IonButton>
-                      </div>
-                      <div className="like_button">
-                        <IonIcon icon={thumbsUpOutline} size="large"></IonIcon>
-                        
                       </div>
                       <h3 className="restaraunt_name">{business.name}</h3>
                       <p>-------------------------</p>
                       <p>{business.location?.address1}</p>
                       <p className="location">
-                        {business.location?.city}, {business.location?.state}
+                        {business.location?.city}, {business.location?.state}&nbsp;
                         {business.location?.zip_code}{" "}
                       </p>
                     </div>

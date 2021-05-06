@@ -34,6 +34,24 @@ header .logo {
 	padding: 2vh 5vh;
 }
 
+/* header .menu {
+	float: right;
+	margin-top: 5px;
+} */
+
+/* header ul li {
+	display: inline-block;
+}
+
+header ul li a {
+	text-decoration: none;
+	font-size: 16px;
+	color: #fff;
+	margin: 0 25px;
+	font-weight: 300;
+	letter-spacing: 1px;
+} */
+
 .content {
 	text-align: center;
 	padding: 200px 10px 0;

@@ -3,34 +3,20 @@ import {
   IonContent,
   IonHeader,
   IonPage,
-  IonTitle,
-  IonToolbar,
   IonItem,
   IonLabel,
-  IonList,
-  IonText,
-  IonAvatar,
   IonThumbnail,
   IonButton,
   IonIcon,
-  IonDatetime,
-  IonSelect,
-  IonSelectOption,
-  IonToggle,
-  IonInput,
-  IonCheckbox,
-  IonRange,
   IonItemDivider,
 } from "@ionic/react";
 import {
-  closeCircle,
-  home,
-  star,
-  navigate,
   informationCircleOutline,
   checkmarkCircle,
   shuffle,
 } from "ionicons/icons";
+import "./backgroundStyle.css"
+import Header from "../../components/Header";
 
 const axios = require("axios");
 const sessionId = window.location.pathname.split("/").slice(-1)[0];
@@ -66,17 +52,15 @@ const Matches: React.FC = () => {
   }, []);
 
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Matches</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+    <IonPage className="background3">
+            <div className= "Header">
+              <h1>Ma<em>tches</em></h1>
+            </div>
       <IonContent>
         {matchesData.map((match: any) => {
           return (
             <div>
-              <IonItem>
+              <IonItem color="light">
                 <IonThumbnail slot="start">
                   <img src={match.image_url} />
                 </IonThumbnail>
@@ -85,6 +69,7 @@ const Matches: React.FC = () => {
                   <p>Votes: {match.votes}</p>
                 </IonLabel>
                 <IonButton
+                  color="dark"
                   onClick={() => window.open(match.url, "_blank")}
                   slot="end"
                 >

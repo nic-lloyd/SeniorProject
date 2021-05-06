@@ -15,6 +15,7 @@
     "mysql": "github:mysqljs/mysql"
   },
   "devDependencies": {
+
     "prisma": "^2.21.2"
   }
 }
