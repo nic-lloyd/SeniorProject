@@ -8,14 +8,13 @@ import {
   IonTabButton,
   IonTabs,
 } from "@ionic/react";
-import { ellipse, settings, heart, people, home } from "ionicons/icons";
+import { ellipse, settings, heart, share, home } from "ionicons/icons";
 import Main_page from "./Tab1_Main_page";
 import Friends from "./Tab2_Friends";
 import Matches from "./Tab3_Matches";
 import Settings from "./Tab4_Settings";
 
 const sessionId = window.location.pathname.split("/").slice(-1)[0];
-console.log(sessionId);
 
 const TabRoot: React.FC = () => {
   return (
@@ -53,8 +52,8 @@ const TabRoot: React.FC = () => {
           <IonLabel>Home</IonLabel>
         </IonTabButton>
         <IonTabButton tab="tab2" href={`/tabs/tab2/${sessionId}`}>
-          <IonIcon icon={people} />
-          <IonLabel>Friends</IonLabel>
+          <IonIcon icon={share} />
+          <IonLabel>Share</IonLabel>
         </IonTabButton>
         <IonTabButton tab="tab3" href={`/tabs/tab3/${sessionId}`}>
           <IonIcon icon={heart} />

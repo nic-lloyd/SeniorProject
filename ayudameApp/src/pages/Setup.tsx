@@ -19,7 +19,9 @@ import {
   IonRadioGroup,
   IonRow,
   IonCheckbox,
+  IonIcon,
 } from "@ionic/react";
+import { arrowBack } from "ionicons/icons";
 import SetupInputs from "../components/SetupInputs";
 import { useState } from "react";
 import "../theme/variables.css";
@@ -51,6 +53,7 @@ const Setup: React.FC = () => {
     open_now: boolean
   ) {
     if (location === undefined || location === "") {
+      alert("Invalid Location");
       console.log("Invalid Location");
       return false;
     }
@@ -62,21 +65,12 @@ const Setup: React.FC = () => {
     }
 
     inputs = { location, price, range, open_now };
-    await submitInfo({ location, price, range, open_now });
     await findRestaurants();
-  }
-
-  //return JSON object
-  async function submitInfo(setupData: SetupData) {
-    let rangeInMeters = parseInt(setupData.range) * 1609.34; //convert range from miles to meters
-    setupData.range = rangeInMeters.toString();
-    console.log(setupData);
+    window.location.replace(window.location.origin + `/tabs/tab1/${sessionId}`);
   }
 
   async function findRestaurants() {
     inputs.range = milesToMeters(inputs.range); //convert range to meters
-    console.log(inputs.range);
-    console.log(sessionId);
 
     let yelpSearch = await REST.get(`/yelp`, {
       params: {
@@ -87,7 +81,6 @@ const Setup: React.FC = () => {
       },
     });
 
-    console.log(yelpSearch);
     //make call to /addSession endpoint
     await REST.post(`/addSession?sessionId=${sessionId}`);
 
@@ -102,7 +95,6 @@ const Setup: React.FC = () => {
       } catch (e) {
         console.log(e);
       }
-      console.log(yelpSearch.data.businesses[i].id);
     }
   }
 
@@ -125,9 +117,11 @@ const Setup: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar color="primary">
+        <IonToolbar color="dark">
           <IonButtons slot="start">
-            <IonBackButton defaultHref="home" />
+            <IonButton href="/home" color="medium">
+              back
+            </IonButton>
           </IonButtons>
           <IonTitle className="ion-text-center">Ayudame</IonTitle>
         </IonToolbar>
@@ -197,19 +191,22 @@ const Setup: React.FC = () => {
           </IonCard>
         </IonItem>
         <IonButton
-          className="ion-float-left ion-margin"
+          className="ion-margin"
           onClick={async () => {
             await checkInfo(location, price, rangeValue.toString(), open_now);
           }}
+          color="dark"
+          expand="block"
         >
           Confirm
         </IonButton>
-        <IonButton
+        {/* <IonButton
           className="ion-float-right ion-margin"
           href={`/tabs/tab1/${sessionId}`}
+          color="dark"
         >
           Find Restaurants
-        </IonButton>
+        </IonButton> */}
       </IonContent>
     </IonPage>
   );
